@@ -1,0 +1,10 @@
+
+#enotif_general {width:90%; padding:20px;}
+#enotif_general table {width: 800px;}
+#enotif_general table th {vertical-align: top;}
+#enotif_general table th span {font-weight: initial;font-style: italic;color: grey;}
+#enotif_general table th,
+#enotif_general table td {padding-right: 15px;}
+#enotif_general .state-active span {font-weight: bold; color: green;}
+#enotif_general .state-stopped span {font-weight: bold; color: red;}
+#enotif_general button.toggle-state {margin-left:10px}

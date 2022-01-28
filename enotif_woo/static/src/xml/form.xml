@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<templates xml:space="preserve">
+    <t t-name="enotif_woo_template_keys">
+        <div id="enotif_woo">        
+          <div class="uw-step-0">
+            <div class="step-title"><h2>Connect to WooCommerce</h2></div>        
+            <label for="woocommerce_url">Woocommerce URL:</label><br/>
+            <input type="text" name="woocommerce_url" id="woocommerce_url" t-att-value="data.woocommerce_url" autocomplete="off"/><br/>
+              It should start with https://<br/>
+            <br/>
+            <label for="woocommerce_api_key">Woocommerce API key:</label><br/>
+            <input type="text" name="woocommerce_api_key" id="woocommerce_api_key" t-att-value="data.woocommerce_api_key" autocomplete="off"/><br/>
+            <br/>
+            <label for="woocommerce_api_secret">Woocommerce API secret:</label><br/>
+            <input type="text" name="woocommerce_api_secret" id="woocommerce_api_secret" t-att-value="data.woocommerce_api_secret" autocomplete="off"/><br/>
+            <br/>
+            <button id="uw_check_connection">Check connection</button><br/>
+            <div id="uw_connection_result" class="connection-result"></div>
+          </div>          
+        </div>        
+    </t>
+</templates>

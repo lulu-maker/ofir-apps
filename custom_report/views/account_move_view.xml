@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="seller_id"/>
+            </field>
+
+            <field name="invoice_date" position="after">
+                <field name="invoice_date_time" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')" string="Bill Date"/>
+                <field name="invoice_date_time" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Invoice Date"/>
+                <field name="delivery_date_time"/>
+            </field>
+
+            <xpath expr="//label[@for='invoice_date'][1]" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='invoice_date'][2]" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_date'][1]" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <field name="invoice_date" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </field>-->
+
+
+<!--            <header position="inside">-->
+<!--                <button class="btn btn-primary" string="Assign Invoice Date" type="action"-->
+<!--                        name="%(custom_report.action_wizard_invoice_date)d" attrs="{'invisible':[('state','!=','posted')]}"/>-->
+<!--            </header>-->
+        </field>
+    </record>
+
+    <record id="account_move_inherit_tree" model="ir.ui.view">
+        <field name="name">account.move.inherit.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="invoice_date_time"/>
+            </field>
+            <xpath expr="//field[@name='invoice_date'][1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_date'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+      <record id="account_move_in_inherit_tree" model="ir.ui.view">
+        <field name="name">account.move.in.inherit.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="invoice_date_time" string="Bill Date"/>
+            </field>
+            <xpath expr="//field[@name='invoice_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='invoice_date'][2]" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+
+        <record id="account_invoice_form_fisc_fields" model="ir.ui.view">
+        	<field name="name">account.invoice.form.fisc.fields</field>
+        	<field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+
+              <field name="ref" position="after">
+                <field name="working_place_id" />
+              </field>
+
+              <xpath expr="/form/header/button[last()]" position="after">
+                  <button name="do_fiscal" string="Fiscalize" type="object" class="oe_highlight" attrs="{'invisible':['|', ('state','==','draft'), ('fisc_state','==','done')]}"/>
+              </xpath>
+
+              <xpath expr="//page[@id='other_tab']" position="after">
+
+                <page string="Fiscalization">
+<!--                  attrs="{'invisible': ['|', ('fisc_state', '=', 'draft'),-->
+<!--                  ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))-->
+<!--                  ]}">-->
+                  <group>
+                    <group>
+                      <field name="number_par" />
+                      <field name="number_zki" />
+                      <field name="number_jir" />
+                    </group>
+                    <group>
+                      <field name="fisc_user_id" />
+                      <field name="fisc_date" />
+                      <field name="fisc_state" />
+                    </group>
+                  </group>
+                  <newline/>
+                  <notebook colspan="4">
+                    <page string="Fiscalization sent">
+                      <separator string="Fisc send data" colspan="4" />
+                      <field name="last_msg_snd" colspan="4" nolabel="1" />
+                    </page>
+                    <page string="Fiscalization received">
+                      <separator string="Fisc receive data" colspan="4" />
+                      <field name="last_msg_rcv" colspan="4" nolabel="1" />
+                    </page>
+                  </notebook>
+                </page>
+
+                <page string="Payments">
+<!--                  attrs="{'invisible': ['|', ('payment_ids', '=', []),-->
+<!--                  ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))-->
+<!--                  ]}">-->
+                  <field name="payment_ids" />
+                </page>
+
+              </xpath>
+
+                <xpath expr="//widget[@name='web_ribbon'][1]" position="replace">
+
+                    <widget name="web_ribbon" title="Paid"
+                            attrs="{'invisible': ['|', '|', ('fisc_state', '==', 'done'), ('payment_state', '!=', 'paid'), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+
+                    <widget name="web_ribbon" title="Fiscalized"
+                            attrs="{'invisible': ['|', ('fisc_state', '!=', 'done'), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+
+                    <widget name="web_ribbon" title="Paid &amp; Fiscalized"
+                            attrs="{'invisible': ['|', '|', ('fisc_state', '!=', 'done'), ('payment_state', '!=', 'paid'), ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="account_invoice_tree_add_jir_and_wp" model="ir.ui.view">
+        	<field name="name">account.invoice.tree.add.jir.and.wp</field>
+        	<field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_invoice_tree" />
+            <field name="arch" type="xml">
+
+              <field name="name" position="after">
+                <field name="number_jir" invisible="context.get('default_type') in ['in_invoice', 'in_refund', 'in_receipt']" groups="base.group_user" optional="show"/>
+                <field name="working_place_id" invisible="context.get('default_type') in ['in_invoice', 'in_refund', 'in_receipt']" groups="base.group_user" optional="hide"/>
+              </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_invoice_filter_add_fisc_filters">
+          <field name="name">view.account.invoice.filter.add.fisc.filters</field>
+          <field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_account_invoice_filter" />
+          <field name="arch" type="xml">
+
+            <field name="partner_id" position="after">
+              <field name="working_place_id"/>
+              <field name="fisc_state"/>
+            </field>
+
+            <!-- filter button fields -->
+            <filter name="draft" position="after">
+              <filter name="fisc_error" string="Fiscalization Error" domain="[('fisc_state', '=', 'error')]"/>
+            </filter>
+
+            <!-- group by fields -->
+            <filter name="salesperson" position="after">
+              <filter name="working_place_id" string="Working Place" domain="[]" context="{'group_by':'working_place_id'}"/>
+              <filter name="fisc_state" string="Fiscalization state" domain="[]" context="{'group_by':'fisc_state'}"/>
+            </filter>
+
+          </field>
+        </record>
+
+  </data>
+</odoo>

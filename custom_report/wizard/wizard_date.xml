@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="wizard_date_form" model="ir.ui.view">
+        <field name="name">Invoice Date</field>
+        <field name="model">wizard.date</field>
+        <field name="arch" type="xml">
+            <form string="Script">
+                <group>
+                    <field name="invoice_date_time" required="1"/>
+                </group>
+                <footer>
+                    <button name="button_create" string="Submit" type="object"
+                        class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="_Cancel" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_invoice_date" model="ir.actions.act_window">
+        <field name="name">Invoice Date</field>
+        <field name="res_model">wizard.date</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_wizard_date" />
+    </record>
+
+
+
+</odoo>

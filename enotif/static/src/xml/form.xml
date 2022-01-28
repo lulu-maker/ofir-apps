@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<templates xml:space="preserve">
+    <t t-name="enotif_template_progress">
+        <div id="enotif_general">
+          <br/>
+            Notifications are processed with a cron job.<br/>
+            It runs with a three minutes interval.<br/>
+            It has a limit to process only ten notifications at a time.<br/>
+            Also there is a time limit. So if it takes longer then not all the ten notifications will be processed.<br/>
+            Not processed notifications will be completed with the next cron job that will start in three minutes.<br/> 
+            Or with another cron job that runs with a 15 minites interval and checkes for new notifications.<br/>           
+            <br/>
+            Live notifications that were received from another website are processed as soon as possible before all the other notifications.<br/>
+            <br/>
+            <br/>
+          <h4>Application status:</h4>
+          <t t-set='selected' t-value="1"/> 
+          <span class="state-active" t-att-style="data.process_notifications ? '' : 'display:none'">
+            <span>Active</span>
+            <button class="toggle-state">Stop Processing</button>
+          </span> 
+          <span class="state-stopped" t-att-style="data.process_notifications ? 'display:none' : ''">          
+            <span>Stopped</span>
+            <button class="toggle-state">Start Processing</button>
+          </span>
+          <div id="enotif_toggle_state_result"></div>
+          <br/>
+          <br/>
+          <div id="enotif_progress" t-att-style="data.process_notifications ? '' : 'display:none'">           
+            <h4>Notifications queue:</h4><br/>
+            <t t-if="data.items.length > 0">
+              <table id="enotif_notifications_table">
+              <tr><th>Type</th><th>Number of items</th><th>Item IDs</th><th>Estimated time to complete<br/><span>number_of_items / 10 * 3min</span></th><th></th></tr>
+              <t t-foreach="data.items" t-as="item">
+                <tr><td><t t-esc="item.type"/></td><td><t t-esc="item.number"/></td><td><t t-esc="item.item_ids_str"/></td><td><t t-esc="item.time"/></td><td><button class="delete-notifications" t-att-data-type="item.type" t-att-data-type_id="item.type_id">Delete</button></td></tr>
+              </t>
+              </table>
+            </t>  
+            <t t-else ="">
+              (there are no items to process)
+            </t>
+            <div id="enotif_delete_notifications_result"></div>
+            <br/>
+            Refresh the page after three minutes to see the updated result.<br/>  
+            <br/>
+            <br/>          
+          </div>       
+          <h4>Other actions:</h4>
+          <br/>
+          <button id="enotif_get_new_notifications">Get New Notifications</button>        
+          <div id="enotif_get_new_notifications_result"></div>
+        </div>        
+    </t>
+</templates>

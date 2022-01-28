@@ -1,0 +1,153 @@
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <div class="oe_span10" style="margin-bottom:50px !important">
+        	<div class="oe_mt32">
+            	<img class="oe_picture" src="uvid.png"/>
+        	</div>
+        </div>
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;"">Updates</h2>
+        <div class="oe_span10">
+        	<p class="oe_mt32">
+        	<b>* 17.06.2021</b> published v14.0 version  /
+        	<i>Dostupna verzija v14.0</i>
+        	</p>
+        	<p class="oe_mt32">
+        	<b>* 30.06.2017</b> Activation of fiscal places will not send data to fiscal web service due to changes in
+        	fiscalisation as of 1.7.2017. (manual activation through website ePorezna) /
+        	<i>Aktivacija poslovnih prostora vise ne salje podatke na poreznu upravu zbog promjena koje
+        	zahtjevaju rucnu prijavu od 1.7.2017. (website ePorezna)</i>
+        	</p>
+		</div>
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;"">Description</h2>
+        <div class="oe_span10">
+        	<p class="oe_mt32">
+        	This module allows you to setup and use Croatian fiscalisation. You need to import your certificate, setup
+        	your fiscal places, invoice journals, payment types, users and taxes. Invoices are fiscalised during the validation
+        	process. If you validate an invoice that has a invoice journal with fiscal place selected then fiscalisation
+        	will take place (depending on the payment type: transaction account payment type is the only one that is not
+        	fiscalised).<br>
+        	After fiscalisation you can check your fiscalisation data in a new tab on the invoice form and you
+        	can repeat the fiscalisation if there was an error (you can do it from the invoice form or you can select
+        	multiple invoices from the invoice tree and fiscalise them all one after another).<br>
+        	Invoice that has been fiscalised cannot be cancelled afterwards.<br><br>
+        	<i>Ovaj modul omogucava koristenje hrvatske fiskalizacije. Kako bi koristili fiskalizaciju morate ucitati svoj
+        	certifikat, postaviti poslovne prostore, dnevnike racuna, vrste placanja, korisnike i poreze. Racuni se fiskaliziraju
+        	prilikom knjizenja. Fiskalizacija ce s izvrsiti ako knjizite racun po dnevniku koji u postavkama ima odabran poslovni
+        	prostor (ovisno o vrsti placanja: transakcijsko placanje je jedino koje se ne fiskalizira).<br>
+        	Nakon fiskalizacije mozete provjeriti podatke u novom tabu na ekranu racuna i po potrebi mozete ponoviti proces ako
+        	je doslo do greske (to mozete napraviti iz ekrana racuna ili iz liste racuna za vise odabranih racuna odjednom).<br>
+        	Racun koji je jednom fiskaliziran vise se ne moze otknjiziti.</i>
+        	</p>
+		</div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Fiscalisation setup</h2>
+        <div class="oe_span6">
+        	<p class="oe_mt32">
+        	You can access fiscal places and logs through settings menu.<br><br>
+        	<i>Postavkama i logovima fiskalizacije mozete pristupiti kroz Odoo postavke.</i>
+        	</p>
+        </div>
+        <div class="oe_span4">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="menu.png"/>
+        	</div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Company setup</h2>
+        <div class="oe_span6">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="company.png"/>
+        	</div>
+        </div>
+        <div class="oe_span4">
+        	<p class="oe_mt32">
+        	Import your PFX certificate and use fiscalisation for testing purposes or for production.<br><br>
+        	<i>Ucitajte svoj PFX certifikat i mozete testirati fiskalizaciju ili je koristiti u produkciji.</i>
+        	</p>
+		</div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Payment terms</h2>
+        <div class="oe_span6">
+        	<p class="oe_mt32">
+        	Select fiscalisation type for each payment term you plan to use in invoice fiscalisation.<br><br>
+        	<i>Odaberite fiskalnu vrstu u svakoj vrsti placanja koju namjeravate koristiti u fiskalizaciji racuna.</i>
+        	</p>
+        </div>
+        <div class="oe_span4">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="paymentTerm.png"/>
+        	</div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Invoice Journals</h2>
+        <div class="oe_span6">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="journal.png"/>
+        	</div>
+        </div>
+        <div class="oe_span4">
+        	<p class="oe_mt32">
+        	Select the fiscal place for each invoice journal you plan to use in fiscalisation.
+        	If there is a fiscal place selected in invoice journal odoo will try to fiscalise every invoice
+        	created with it (except for transaction account payment).<br><br>
+        	<i>Odaberite poslovni prostor na svakom dnevniku izlaznog racuna koji zelite fiskalizirati.
+        	Ako je odabran poslovni prostor na dnevniku onda ce se prilikom knjizenja svakom racuna po tom
+        	dnevniku pokrenuti postupak fiskalizacije (osim ako se radi o transakcijskom placanju).</i>
+        	</p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Sequences</h2>
+        <div class="oe_span6">
+        	<p class="oe_mt32">
+        	Setup your invoice sequences with the correct prefix and suffix (format should be X/Y/Z
+        	where X is the number of the invoice and Y/Z is the suffix where Y is the fiscal place code
+        	and Z is the code of the payment device).<br><br>
+        	<i>Postavite sekvence racuna sa pravilnim prefiksom i sufiksom (format bi trebao biti X/Y/Z
+        	gdje je X broj racuna a Y/Z je sufiks u kojem je Y sifra poslovnog prostora a Z je sifra
+        	naplatnog uredjaja).</i>
+        	</p>
+        </div>
+        <div class="oe_span4">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="sequence.png"/>
+        	</div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <h2 class="oe_slogan oe_mb32 oe_span10" style="color:#875A7B;">Taxes</h2>
+        <div class="oe_span6">
+        	<div class="oe_mt32">
+            	<img class="oe_picture oe_screenshot" src="tax.png"/>
+        	</div>
+        </div>
+        <div class="oe_span4">
+        	<p class="oe_mt32">
+        	Select the tax percentage and fiscal type in new tab in taxes. For 25% use 25, not 0.25.<br><br>
+        	<i>Upisite postotak poreza i odaberite fiskalnu vrstu poreza u postavkama poreza. Za 25% koristite 25, ne 0.25.</i>
+        	</p>
+        </div>
+    </div>
+</section>

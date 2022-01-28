@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="enotif_woo_connection" model="enotif.connection">
+        <field name="model_id" ref="enotif_woo.model_enotif_woo_connection"/>      
+    </record>   
+</odoo>
+

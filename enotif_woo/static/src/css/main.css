@@ -1,0 +1,10 @@
+
+#enotif_woo {width:50%; padding:20px;}
+
+#enotif_woo .step-title {margin-bottom: 30px;}
+#enotif_woo input[type="text"],
+#enotif_woo textarea {display: inline; width:100%;}
+#enotif_woo .connection-result {padding-top: 15px;}
+
+#enotif_woo .connection-result .success-message {font-weight:bold;color:green;}
+#enotif_woo .connection-result .error-message {font-weight:bold;color:red;}

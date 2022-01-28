@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_invoice_document_hr_fiscalization_fields" inherit_id="account.report_invoice_document">
+            <xpath expr="//p[@name='comment']" position="before">
+                <div class="col-auto mw-100 mb-2" t-if="o.number_zki" name="zki">
+                    <strong>ZKI:</strong>
+                    <p class="m-0" t-field="o.number_zki"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="o.number_jir" name="jir">
+                    <strong>JIR:</strong>
+                    <p class="m-0" t-field="o.number_jir"/>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

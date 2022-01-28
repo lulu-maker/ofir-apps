@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+
+        <record id="view_company_form_fiscalization_configuration" model="ir.ui.view">
+            <field name="name">view.company.form.fiscalization.configuration</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="arch" type="xml">
+
+              <xpath expr="//notebook/page" position="after">
+                  <page string="Fiscalization setup">
+                    <group>
+                      <field name="use_fiscalization" />
+                    </group>
+                    <separator string="Setup" colspan="4" />
+                    <group>
+                        <group>
+                            <field name="count_system"/>
+                        </group>
+                        <group>
+                            <field name="server_address" />
+                            <field name="server_port" />
+                            <field name="service_name" />
+                            <button name="button_test_echo" string="ECHO test" type="object" class="btn-link"/>
+                            <field name="echo_message" nolabel="1"/>
+                        </group>
+                    </group>
+                    <group name="certificate_config" string="Certificate configuration">
+                      <group>
+                        <field name="certificate" />
+                        <field name="certificate_pass" password="True"/>
+                        <field name="certificate_pem" invisible="1" />
+                        <field name="certificate_key" invisible="1" />
+                      </group>
+                      <group>
+                      </group>
+                    </group>
+                  </page>
+                </xpath>
+
+            </field>
+        </record>
+
+  </data>
+</odoo>

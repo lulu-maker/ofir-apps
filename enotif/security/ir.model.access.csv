@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_enotif_notification,access enotif notification module,enotif.model_enotif_notification,website.group_website_publisher,1,1,1,1
+access_enotif_connection,access_enotif_connection,model_enotif_connection,website.group_website_publisher,1,1,1,1
+access_enotif_type,access enotif type module,enotif.model_enotif_type,website.group_website_publisher,1,1,1,1
+access_enotif_settings,access enotif settings module,enotif.model_enotif_settings,website.group_website_publisher,1,1,1,1
+

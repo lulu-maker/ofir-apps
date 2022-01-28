@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+
+        <record id="view_working_place_form" model="ir.ui.view">
+            <field name="name">view.working.place.form</field>
+            <field name="model">working.place</field>
+            <field name="arch" type="xml">
+
+                <form string="Working Place">
+                  <header>
+                    <button string='Activate WP' name="activate_wp" type="object" class="oe_highlight" attrs="{'invisible':[('fisc_state','=','open')]}"/>
+                    <button string='Deactivate WP' name="deactivate_wp" type="object" class="oe_highlight" attrs="{'invisible':[('fisc_state','!=','open')]}"/>
+                  </header>
+                  <sheet>
+                    <group>
+                      <field name="fisc_state"/>
+                    </group>
+                    <group>
+                      <field name="name" select="1"/>
+                      <field name="code" select="1"/>
+                      <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                    </group>
+                      <newline />
+                      <separator colspan="4" string="Fiscalization"/>
+                    <group>
+                      <group>
+                        <field name="street"/>
+                        <field name="number"/>
+                        <field name="number_extra"/>
+                        <field name="post_code"/>
+                        <field name="city"/>
+                        <field name="county"/>
+                      </group>
+                      <group>
+                        <field name="work_time"/>
+                        <field name="spec"/>
+                      </group>
+                    </group>
+
+                  </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="view_working_place_tree" model="ir.ui.view">
+            <field name="name">view.working.place.tree</field>
+            <field name="model">working.place</field>
+            <field name="arch" type="xml">
+                <tree string="Working Place">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="work_time"/>
+                    <field name="fisc_state"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_working_place_form" model="ir.actions.act_window">
+            <field name="name">Working Place</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">working.place</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['|',('active','=',True),('active','=',False)]</field>
+            <field name="view_id" ref="view_working_place_tree"/>
+        </record>
+
+        <menuitem id="menu_action_working_place_form" parent="account.account_account_menu" action="action_working_place_form" sequence="20"/>
+
+      </data>
+</odoo>

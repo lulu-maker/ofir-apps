@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <report-->
+<!--                id="report_sale_template"-->
+<!--                model="sale.order"-->
+<!--                name="custom_report.sale_report_templates"-->
+<!--                file="custom_report.sale_report_templates"-->
+<!--                report_type="qweb-pdf"-->
+<!--                string="Sale Order Report"/>-->
+
+<!--        <report-->
+<!--                id="report_invoice_template"-->
+<!--                model="account.move"-->
+<!--                name="custom_report.invoice_report_templates"-->
+<!--                file="custom_report.invoice_report_templates"-->
+<!--                report_type="qweb-pdf"-->
+<!--                string="Invoice Report"/>-->
+
+<!--        <record id="report_sale_template" model="ir.actions.report">-->
+<!--            <field name="paperformat_id" ref="custom_report.paperformat_sales_custom"/>-->
+<!--        </record>-->
+
+    </data>
+</odoo>
