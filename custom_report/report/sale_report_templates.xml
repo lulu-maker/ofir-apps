@@ -90,7 +90,7 @@
             <div class="page" style="margin-left: 15px;margin-right:15px;">
                 <div class="row" style="border-bottom: 1px solid #f1f1f1;">
                     <div class="col-7" style="padding-top:16px;padding-bottom:16px;">
-                        <div class="text-muted" style="font-size:12px;">Kupac:</div>
+                        <div class="text-muted" style="font-size:12px;">Customer:</div>
                         <div style="font-size:12px;">
                             <strong>
                                 <t t-esc="o.partner_id.name"/>
@@ -106,7 +106,7 @@
                             <t t-if="o.partner_id.state_id">,</t>
                             <t t-esc="o.partner_id.state_id.name"/>
                         </div>
-                        <div style="font-size:12px;padding-top:8px;"><strong>OIB:</strong><t t-esc="o.company_id.vat"/>
+                        <div style="font-size:12px;padding-top:8px;"><strong>VAT:</strong><t t-esc="o.company_id.vat"/>
                         </div>
                         <div style="font-size:12px;">
                             <strong>Email:</strong>
@@ -117,9 +117,13 @@
                     <div class="col-4" style="padding-top:16px;padding-bottom:16px;">
                         <div class="row" style="padding:5px;margin-bottom:3px;background-color:lightgray;">
                             <div class="col-6">
-                                <div style="font-size:12px;">
-                                    <strong>Ponuda Broj:</strong>
-                                </div>
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <span t-if="o.state not in ['draft','sent']">Order #</span>
+                                    <span t-if="o.state in ['draft','sent']">Quotation #</span>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <span>Pro-Forma Invoice #</span>
+                                </t>
                             </div>
                             <div class="col-6 text-right">
                                 <div style="font-size:12px;">
@@ -132,13 +136,13 @@
                         <div class="row" style="padding-top:5px;padding-bottom:5px;background-color:lightgray;">
                             <div class="col-5">
                                 <div style="font-size:12px;">
-                                    <strong>Datum Ponude:</strong>
+                                    <strong>Quatation Date:</strong>
                                 </div>
                                 <div style="font-size:12px;">
-                                    <strong>Operater:</strong>
+                                    <strong>Sales Person:</strong>
                                 </div>
                                 <div style="font-size:12px;">
-                                    <strong>Rok Plaćanja:</strong>
+                                    <strong>Expiration:</strong>
                                 </div>
                             </div>
                             <div class="col-7 text-right">
@@ -159,12 +163,12 @@
                         <div class="row">
                             <div class="col-2">
                                 <div style="font-size:12px;">
-                                    R. Br.
+                                    No.
                                 </div>
                             </div>
                             <div class="col-10">
                                 <div style="font-size:12px;">
-                                    <strong>Opis proizvoda / usluge </strong>
+                                    <strong>Description </strong>
                                 </div>
                             </div>
                         </div>
@@ -173,22 +177,27 @@
                         <div class="row">
                             <div class="col-3 text-center">
                                 <div style="font-size:12px;">
-                                  Količina
+                                    Quantity
                                 </div>
                             </div>
                             <div class="col-3 text-center">
                                 <div style="font-size:12px;">
-                                    Cijena
+                                    Unit Price
                                 </div>
                             </div>
                             <div class="col-3 text-center">
                                 <div style="font-size:12px;">
-                                   Porezi
+                                    Taxes
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div style="font-size:12px;">
+                                    Disc.%
                                 </div>
                             </div>
                             <div class="col-3 text-right">
                                 <div style="font-size:12px;">
-                                   Iznos stavke
+                                    Subtotal
                                 </div>
                             </div>
                         </div>
@@ -229,6 +238,11 @@
                             <div class="col-3 text-center">
                                 <div style="font-size:12px;">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div style="font-size:12px;">
+                                    <span t-esc="line.discount"/>
                                 </div>
                             </div>
                             <div class="col-3 text-right">
@@ -278,7 +292,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:13px;">
-                                    <strong>Ukupno</strong>
+                                    <strong>Unit Amoun Total</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -293,7 +307,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:13px;">
-                                    <strong>Porezi</strong>
+                                    <strong>Taxes</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -308,7 +322,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:15px;">
-                                    <strong>UKUPNO ZA PLATITI</strong>
+                                    <strong>Total</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -330,11 +344,11 @@
                         <ul style="padding:0px;">
                             <img t-att-src="'https://braco.does-it.net/2dbarcode/web/api/v1/barcode?renderer=image&amp;options[format]=png&amp;options[color]=%23000000&amp;options[scale]=1&amp;options[padding]=5&amp;options[ratio]=2&amp;data[amount]='+str(o.amount_total)+'&amp;data[sender][name]='+(o.partner_id.name)[:29]+'&amp;data[sender][street]='+(o.partner_id.street)[:26]+'&amp;data[sender][place]='+(o.partner_id.city)[:26]+'&amp;data[receiver][name]=Ofir+d.o.o.&amp;data[receiver][street]=Ramska+20&amp;data[receiver][place]=31000+Osijek&amp;data[receiver][iban]=HR5323600001101368262&amp;data[receiver][model]=00&amp;data[receiver][reference]='+o.name+'&amp;data[purpose]=SCVE&amp;data[description]=Uplata po rc+'+o.name+''"/>
                             <li style="font-size:12px;">
-                                <strong>Podaci za uplatu: </strong>
+                                <strong>Payment Instructions: </strong>
                                 <t t-esc="o.company_id.iban"/>, poziv na broj: <t t-esc="o.name"/>
                             </li>
                             <li style="font-size:12px;">
-                                <strong>Napomena: </strong>
+                                <strong>Note: </strong>
                                 <t t-esc="o.note"/>
                             </li>
                         </ul>
