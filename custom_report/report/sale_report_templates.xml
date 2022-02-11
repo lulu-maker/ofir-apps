@@ -175,7 +175,7 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                     Quantity
                                 </div>
@@ -185,12 +185,12 @@
                                     Unit Price
                                 </div>
                             </div>
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                     Taxes
                                 </div>
                             </div>
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                     Disc.%
                                 </div>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                    <t t-esc="int(line.product_uom_qty)"/>
                                 </div>
@@ -235,12 +235,12 @@
 <!--                                    <t t-esc="'{:.2f}'.format(line.price_unit)"/>-->
                                 </div>
                             </div>
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
                                 </div>
                             </div>
-                            <div class="col-3 text-center">
+                            <div class="col-2 text-center">
                                 <div style="font-size:12px;">
                                     <span t-esc="line.discount"/>
                                 </div>
