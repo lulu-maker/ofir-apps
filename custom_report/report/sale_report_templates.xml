@@ -226,7 +226,7 @@
                         <div class="row">
                             <div class="col-2 text-center">
                                 <div style="font-size:12px;">
-                                   <t t-esc="int(line.product_uom_qty)"/>
+                                   <t t-esc="'{:.2f}'.format(line.product_uom_qty)"/>
                                 </div>
                             </div>
                             <div class="col-3 text-center">
