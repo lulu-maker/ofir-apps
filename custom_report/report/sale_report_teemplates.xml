@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="expenses_standard">
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+        <div class="header" style="margin-left: 15px;margin-right:15px;">
+            <div class="row" style="border-bottom: 1px solid #f1f1f1;">
+                <div class="col-3" style="padding-top:16px;padding-bottom:16px;">
+                    <img alt="Logo" t-att-src="'/logo?company=%d' % (o.company_id)" style="width:100%;height:90px;"/>
+                </div>
+                <div class="col-9 text-right" style="padding-top:16px;padding-bottom:16px;">
+                    <div style="font-size:12px;">
+                        <t t-esc="o.company_id.name"/>
+                    </div>
+                    <div style="font-size:12px;">
+                        <t t-esc="o.company_id.street"/>
+                    </div>
+                    <div style="font-size:12px;">
+                        <t t-esc="o.company_id.city"/>
+                        <t t-if="o.company_id.zip">,</t>
+                        <t t-esc="o.company_id.zip"/>
+                        <t t-if="o.company_id.state_id">,</t>
+                        <t t-esc="o.company_id.state_id.name"/>
+                    </div>
+                    <div style="font-size:12px;">
+                        <strong>Email:</strong>
+                        <t t-esc="o.company_id.email"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer o_standard_footer" style="margin-left:-15px;margin-right:-15px;">
+            <div class="row" style="border-top: 1px solid black;">
+                <div class="col-4 text-center" style="padding-top:8px;">
+                    <div style="font-size:12px;">Sjedište: <t t-esc="o.company_id.sjedište"/></div>
+                    <div style="font-size:12px;">Poslovna jedinica:
+                        <t t-esc="o.company_id.street"/>
+                        <t t-esc="o.company_id.city"/>
+                        <t t-if="o.company_id.zip">,</t>
+                        <t t-esc="o.company_id.zip"/>
+                        <t t-if="o.company_id.state_id">,</t>
+                        <t t-esc="o.company_id.state_id.name"/>
+                    </div>
+                </div>
+                <div class="col-4 text-center" style="padding-top:8px;">
+                    <div style="font-size:12px;">OIB:
+                        <t t-esc="o.company_id.vat"/>
+                    </div>
+                    <div style="font-size:12px;">IBAN:
+                        <t t-esc="o.company_id.iban"/>
+                    </div>
+                </div>
+                <div class="col-4 text-center" style="padding-top:8px;">
+                    <div style="font-size:12px;">Telefon:
+                        <t t-esc="o.company_id.phone"/>
+                    </div>
+                    <div style="font-size:12px;">E-mail:
+                        <t t-esc="o.company_id.email"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="padding-top:8px;">
+                    <div style="font-size:12px;">
+                        <t t-esc="o.company_id.description"/>
+                    </div>
+                    <div class="text-right" style="font-size:12px;padding-top:8px;">
+                        <div t-if="report_type == 'pdf'" class="text-black">
+                            Page:
+                            <span class="page"/>
+                            /
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="web_expenses_log">
+        <t t-call="custom_report.expenses_standard">
+            <t t-raw="0"/>
+        </t>
+    </template>
+
+    <template id="report_sale">
+        <t t-call="custom_report.web_expenses_log">
+            <div class="page" style="margin-left: 15px;margin-right:15px;">
+                <div class="row" style="border-bottom: 1px solid #f1f1f1;">
+                    <div class="col-7" style="padding-top:16px;padding-bottom:16px;">
+                        <div class="text-muted" style="font-size:12px;">Customer:</div>
+                        <div style="font-size:12px;">
+                            <strong>
+                                <t t-esc="o.partner_id.name"/>
+                            </strong>
+                        </div>
+                        <div style="font-size:12px;">
+                            <t t-esc="o.partner_id.street"/>
+                        </div>
+                        <div style="font-size:12px;">
+                            <t t-esc="o.partner_id.city"/>
+                            <t t-if="o.partner_id.zip">,</t>
+                            <t t-esc="o.partner_id.zip"/>
+                            <t t-if="o.partner_id.state_id">,</t>
+                            <t t-esc="o.partner_id.state_id.name"/>
+                        </div>
+                        <div style="font-size:12px;padding-top:8px;"><strong>VAT:</strong><t t-esc="o.company_id.vat"/>
+                        </div>
+                        <div style="font-size:12px;">
+                            <strong>Email:</strong>
+                            <t t-esc="o.partner_id.email"/>
+                        </div>
+                    </div>
+                    <div class="col-1"/>
+                    <div class="col-4" style="padding-top:16px;padding-bottom:16px;">
+                        <div class="row" style="padding:5px;margin-bottom:3px;background-color:lightgray;">
+                            <div class="col-6">
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <span t-if="o.state not in ['draft','sent']">Order #</span>
+                                    <span t-if="o.state in ['draft','sent']">Quotation #</span>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <span>Pro-Forma Invoice #</span>
+                                </t>
+                            </div>
+                            <div class="col-6 text-right">
+                                <div style="font-size:12px;">
+                                    <strong>
+                                        <t t-esc="o.name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:5px;padding-bottom:5px;background-color:lightgray;">
+                            <div class="col-5">
+                                <div style="font-size:12px;">
+                                    <strong>Quatation Date:</strong>
+                                </div>
+                                <div style="font-size:12px;">
+                                    <strong>Sales Person:</strong>
+                                </div>
+                                <div style="font-size:12px;">
+                                    <strong>Expiration:</strong>
+                                </div>
+                            </div>
+                            <div class="col-7 text-right">
+                                <div style="font-size:12px;">
+                                    <t t-esc="o.date_order.strftime('%d.%m.%Y %H:%M')"/>
+                                </div>
+                                <div style="font-size:12px;"><t t-esc="o.user_id.name"/></div>
+
+                                <div style="font-size:12px;">
+                                    <t t-esc="o.payment_term_id.name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:24px;background-color:lightgray;padding:5px;">
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2">
+                                <div style="font-size:12px;">
+                                    No.
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div style="font-size:12px;">
+                                    <strong>Description </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Quantity
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div style="font-size:12px;">
+                                    Unit Price
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Taxes
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Disc.%
+                                </div>
+                            </div>
+                            <div class="col-3 text-right">
+                                <div style="font-size:12px;">
+                                    Subtotal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <t t-set="seq" t-value="1"/>
+                <t t-foreach="o.order_line" t-as="line">
+                    <div class="row" style="border: 1px solid #f1f1f1;">
+
+                        <div class="col-6">
+                        <div class="row">
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    <t t-esc="seq"/>
+                                </div>
+                                <t t-set="seq" t-value="seq + 1"/>
+                            </div>
+                            <div class="col-10">
+                                <div style="font-size:12px;">
+                                      <t t-esc="line.name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                   <t t-esc="float(line.product_uom_qty)"/>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div style="font-size:12px;">
+                                    <t t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+<!--                                    <t t-esc="'{:.2f}'.format(line.price_unit)"/>-->
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    <span t-esc="line.discount"/>
+                                </div>
+                            </div>
+                            <div class="col-3 text-right">
+                                <div style="font-size:12px;">
+                                     <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            <!--
+                        <div class="col-1" style="border-right: 1px solid #f1f1f1;">
+                            <div style="font-size:12px;">
+                                <t t-esc="seq"/>
+                            </div>
+                            <t t-set="seq" t-value="seq + 1"/>
+                        </div>
+                        <div class="col-3" style="border-right: 1px solid #f1f1f1;">
+                            <div style="font-size:12px;">
+                                <t t-esc="line.name"/>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                            <div style="font-size:12px;">
+                                <t t-esc="line.product_uom_qty"/>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                            <div style="font-size:12px;">
+                                <t t-esc="'{:.2f}'.format(line.price_unit)"/>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                            <div style="font-size:12px;">
+                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                            </div>
+                        </div>
+                        <div class="col-2 text-right">
+                            <div style="font-size:12px;">
+                                <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </div>
+                        </div> -->
+                    </div>
+                </t>
+                <div class="row" style="margin-top:16px;border-bottom:1px solid black;">
+                    <div class="col-7"/>
+                    <div class="col-5">
+                        <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
+                            <div class="col-6" style="padding:0px;">
+                                <div style="font-size:13px;">
+                                    <strong>Unit Amoun Total</strong>
+                                </div>
+                            </div>
+                            <div class="col-6 text-right" style="padding:0px;">
+                                <div style="font-size:13px;">
+                                    <strong>
+                                        <t t-esc="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+<!--                                        <t t-esc="'{:.2f}'.format(o.amount_untaxed)"/>-->
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
+                            <div class="col-6" style="padding:0px;">
+                                <div style="font-size:13px;">
+                                    <strong>Taxes</strong>
+                                </div>
+                            </div>
+                            <div class="col-6 text-right" style="padding:0px;">
+                                <div style="font-size:13px;">
+                                    <strong>
+                                        <t t-esc="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+<!--                                        <t t-esc="'{:.2f}'.format(o.amount_tax)"/>-->
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:8px;padding-bottom:8px;">
+                            <div class="col-6" style="padding:0px;">
+                                <div style="font-size:15px;">
+                                    <strong>Total</strong>
+                                </div>
+                            </div>
+                            <div class="col-6 text-right" style="padding:0px;">
+                                <div style="font-size:15px;">
+                                    <strong><t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></strong>
+<!--                                    <t t-esc="'{:.2f}'.format(o.amount_total)" />-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="row" style="padding-top:64px;">-->
+<!--                    <div class="col-4" style="border:1px solid black;">-->
+<!--                        <img src="/custom_report/static/src/img/Question Icon.png" style="width:100%;height:60px;"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="row" style="padding-top:32px;">
+                    <div class="col-12">
+                        <ul style="padding:0px;">
+                            <img t-att-src="'https://braco.does-it.net/2dbarcode/web/api/v1/barcode?renderer=image&amp;options[format]=png&amp;options[color]=%23000000&amp;options[scale]=1&amp;options[padding]=5&amp;options[ratio]=2&amp;data[amount]='+str(o.amount_total)+'&amp;data[sender][name]='+(o.partner_id.name)[:29]+'&amp;data[sender][street]='+(o.partner_id.street)[:26]+'&amp;data[sender][place]='+(o.partner_id.city)[:26]+'&amp;data[receiver][name]=Ofir+d.o.o.&amp;data[receiver][street]=Ramska+20&amp;data[receiver][place]=31000+Osijek&amp;data[receiver][iban]=HR5323600001101368262&amp;data[receiver][model]=00&amp;data[receiver][reference]='+o.name+'&amp;data[purpose]=SCVE&amp;data[description]=Uplata po rc+'+o.name+''"/>
+                            <li style="font-size:12px;">
+                                <strong>Payment Instructions: </strong>
+                                <t t-esc="o.company_id.iban"/>, poziv na broj: <t t-esc="o.name"/>
+                            </li>
+                            <li style="font-size:12px;">
+                                <strong>Note: </strong>
+                                <t t-esc="o.note"/>
+                            </li>
+                        </ul>
+                       <!-- <ul style="padding:0px;">
+                            <li style="font-size:12px;">
+                                <strong>Način plaćanja:</strong>Transakcijski račun
+                            </li>
+                            <li style="font-size:12px;">
+                                <strong>Operater / Račun izdao:</strong>
+                                <t t-esc="o.user_id.name"/>
+                            </li>
+                            <li style="font-size:12px;">
+                                <strong>Podaci za uplatu:</strong>
+                                <t t-esc="o.reference"/>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+<!--    <template id="sale_report_templates">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-foreach="docs" t-as="o">-->
+<!--                <t t-call="custom_report.report_sale"/>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </template>-->
+
+    <template id="sale.report_saleorder">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+
+                <t t-call="custom_report.report_sale" t-lang="user.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
