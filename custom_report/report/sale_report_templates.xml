@@ -159,7 +159,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top:24px;background-color:lightgray;padding:5px;">
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="row">
                             <div class="col-2">
                                 <div style="font-size:12px;">
@@ -173,7 +173,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="row">
                             <div class="col-2 text-center">
                                 <div style="font-size:12px;">
@@ -206,23 +206,22 @@
                 <t t-set="seq" t-value="1"/>
                 <t t-foreach="o.order_line" t-as="line">
                     <div class="row" style="border: 1px solid #f1f1f1;">
-
-                        <div class="col-6">
-                        <div class="row">
-                            <div class="col-2 text-center">
-                                <div style="font-size:12px;">
-                                    <t t-esc="seq"/>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-2 text-center">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="seq"/>
+                                    </div>
+                                    <t t-set="seq" t-value="seq + 1"/>
                                 </div>
-                                <t t-set="seq" t-value="seq + 1"/>
-                            </div>
-                            <div class="col-10">
-                                <div style="font-size:12px;">
-                                      <t t-esc="line.name"/>
+                                <div class="col-10">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="line.name"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="row">
                             <div class="col-2 text-center">
                                 <div style="font-size:12px;">
