@@ -2,7 +2,7 @@
 <odoo>
 
     <template id="expenses_standard">
-            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
 
             <t t-raw="0"/>
         </div>
@@ -37,12 +37,12 @@
                 <div class="col-4 text-center" style="padding-top:8px;">
                     <div style="font-size:12px;">Sjedište: <t t-esc="o.company_id.sjedište"/></div>
                     <div style="font-size:12px;">Poslovna jedinica: Vinkovačka cesta 68, Osijek, HR
-<!--                        <t t-esc="o.company_id.street"/>-->
-<!--                        <t t-esc="o.company_id.city"/>-->
-<!--                        <t t-if="o.company_id.zip">,</t>-->
-<!--                        <t t-esc="o.company_id.zip"/>-->
-<!--                        <t t-if="o.company_id.state_id">,</t>-->
-<!--                        <t t-esc="o.company_id.state_id.name"/>-->
+                        <!--                        <t t-esc="o.company_id.street"/>-->
+                        <!--                        <t t-esc="o.company_id.city"/>-->
+                        <!--                        <t t-if="o.company_id.zip">,</t>-->
+                        <!--                        <t t-esc="o.company_id.zip"/>-->
+                        <!--                        <t t-if="o.company_id.state_id">,</t>-->
+                        <!--                        <t t-esc="o.company_id.state_id.name"/>-->
                     </div>
                 </div>
                 <div class="col-4 text-center" style="padding-top:8px;">
@@ -134,28 +134,50 @@
                         </div>
                         <div class="row" style="padding-top:5px;padding-bottom:5px;background-color:lightgray;">
                             <div class="col-5">
-                                <div style="font-size:12px;">
-                                    <strong>Datum Računa:</strong>
-                                </div>
-                                <t t-if="o.delivery_date_time">
-                                <div style="font-size:11px;">
-                                    <strong>Datum Isporuke:</strong>
-                                </div>
+                                <t t-if="o.invoice_date_time">
+                                    <div style="font-size:12px;">
+                                        <strong>Datum Računa:</strong>
+                                    </div>
                                 </t>
-                                <div style="font-size:12px;">
-                                    <strong>Rok Plaćanja:</strong>
-                                </div>
+                                <t t-if="o.invoice_user_id">
+                                    <div style="font-size:12px;">
+                                        <strong>Prodavač:</strong>
+                                    </div>
+                                </t>
+                                <t t-if="o.delivery_date_time">
+                                    <div style="font-size:11px;">
+                                        <strong>Datum Isporuke:</strong>
+                                    </div>
+                                </t>
+                                <t t-if="o.invoice_date_due">
+                                    <div style="font-size:12px;">
+                                        <strong>Rok Plaćanja:</strong>
+                                    </div>
+                                </t>
+                                <t t-elif="o.invoice_payment_term_id">
+                                    <div style="font-size:12px;">
+                                        <strong>Rok Plaćanja:</strong>
+                                    </div>
+                                </t>
+
                             </div>
                             <div class="col-7 text-right">
-                                <div style="font-size:12px;">
-<!--                                    <t t-esc="o.invoice_date_time"/>-->
-                                    <t t-esc="o.invoice_date_time.strftime('%d.%m.%Y %H:%M')"/>
-                                </div>
+                                <t t-if="o.invoice_date_time">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="o.invoice_date_time.strftime('%d.%m.%Y %H:%M')"/>
+                                    </div>
+                                </t>
+                                <t t-if="o.invoice_user_id">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="o.invoice_user_id.name"/>
+                                    </div>
+                                </t>
+
                                 <t t-if="o.delivery_date_time">
-                                <div style="font-size:12px;">
-<!--                                    <t t-esc="o.delivery_date_time"/>-->
-                                    <t t-esc="o.delivery_date_time.strftime('%d.%m.%Y')"/>
-                                </div>
+                                    <div style="font-size:12px;">
+                                        <!--                                    <t t-esc="o.delivery_date_time"/>-->
+                                        <t t-esc="o.delivery_date_time.strftime('%d.%m.%Y')"/>
+                                    </div>
                                 </t>
                                 <div style="font-size:12px;">
                                     <t t-if="o.invoice_date_due">
@@ -188,31 +210,31 @@
 
                     <div class="col-6">
                         <div class="row">
-                    <div class="col-2 text-center">
-                        <div style="font-size:10px;">
-                           Količina
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div style="font-size:12px;">
-                          Cijena
-                        </div>
-                    </div>
-                    <div class="col-2 text-center">
-                        <div style="font-size:12px;">
-                            Popust
-                        </div>
-                    </div>
-                    <div class="col-2 text-center">
-                        <div style="font-size:12px;">
-                           Porezi
-                        </div>
-                    </div>
-                    <div class="col-3 text-right">
-                        <div style="font-size:12px;">
-                            Cijena
-                        </div>
-                    </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:10px;">
+                                    Količina
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div style="font-size:12px;">
+                                    Cijena
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Popust
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Porezi
+                                </div>
+                            </div>
+                            <div class="col-3 text-right">
+                                <div style="font-size:12px;">
+                                    Cijena
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,53 +243,53 @@
                     <div class="row" style="border: 1px solid #f1f1f1;">
 
                         <div class="col-6">
-                        <div class="row">
-                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-                                <t t-esc="seq"/>
+                            <div class="row">
+                                <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="seq"/>
+                                    </div>
+                                    <t t-set="seq" t-value="seq + 1"/>
+                                </div>
+                                <div class="col-10" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="line.name"/>
+                                    </div>
+                                </div>
                             </div>
-                            <t t-set="seq" t-value="seq + 1"/>
-                        </div>
-                        <div class="col-10" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-                                <t t-esc="line.name"/>
-                            </div>
-                        </div>
-                        </div>
                         </div>
 
-                          <div class="col-6">
-                        <div class="row">
-                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-                                <t t-esc="int(line.quantity)"/>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="int(line.quantity)"/>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-center" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        <!--                                <t t-esc="'{:.2f}'.format(line.price_unit)"/>-->
+                                    </div>
+                                </div>
+                                <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <!--                                <t t-esc="line.discount"/>-->
+                                        <t t-esc="'{:.2f}'.format(line.discount)"/>%
+                                    </div>
+                                </div>
+                                <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
+                                    <div style="font-size:12px;">
+                                        <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                                    </div>
+                                </div>
+                                <div class="col-3 text-right">
+                                    <div style="font-size:12px;">
+                                        <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        <!--                                <t t-esc="'{:.2f}'.format(line.price_subtotal)"/>-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-3 text-center" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-                                <t t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-<!--                                <t t-esc="'{:.2f}'.format(line.price_unit)"/>-->
-                            </div>
-                        </div>
-                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-<!--                                <t t-esc="line.discount"/>-->
-                                <t t-esc="'{:.2f}'.format(line.discount)"/>%
-                            </div>
-                        </div>
-                        <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
-                            <div style="font-size:12px;">
-                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
-                            </div>
-                        </div>
-                        <div class="col-3 text-right">
-                            <div style="font-size:12px;">
-                                <t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-<!--                                <t t-esc="'{:.2f}'.format(line.price_subtotal)"/>-->
-                            </div>
-                        </div>
-                        </div>
-                          </div>
                     </div>
                 </t>
                 <div class="row" style="margin-top:16px;border-bottom:1px solid black;">
@@ -283,7 +305,7 @@
                                 <div style="font-size:13px;">
                                     <strong>
                                         <t t-esc="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-<!--                                         <t t-esc="'{:.2f}'.format(o.amount_untaxed)"/>-->
+                                        <!--                                         <t t-esc="'{:.2f}'.format(o.amount_untaxed)"/>-->
                                     </strong>
                                 </div>
                             </div>
@@ -298,7 +320,7 @@
                                 <div style="font-size:13px;">
                                     <strong>
                                         <t t-esc="o.amount_tax" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-<!--                                        <t t-esc="'{:.2f}'.format(o.amount_tax)"/>-->
+                                        <!--                                        <t t-esc="'{:.2f}'.format(o.amount_tax)"/>-->
                                     </strong>
                                 </div>
                             </div>
@@ -313,7 +335,7 @@
                                 <div style="font-size:15px;">
                                     <strong>
                                         <t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-<!--                                         <t t-esc="'{:.2f}'.format(o.amount_total)"/>-->
+                                        <!--                                         <t t-esc="'{:.2f}'.format(o.amount_total)"/>-->
                                     </strong>
                                 </div>
                             </div>
@@ -321,18 +343,18 @@
                     </div>
                 </div>
                 <div class="row" style="padding-top:8px;">
-<!--                    <div class="col-12">-->
-<!--                        <div style="font-size:12px;">-->
-<!--                            Uvjet plaćanja:-->
-<!--                            <t t-esc="o.invoice_payment_term_id.name"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-12">-->
+                    <!--                        <div style="font-size:12px;">-->
+                    <!--                            Uvjet plaćanja:-->
+                    <!--                            <t t-esc="o.invoice_payment_term_id.name"/>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
-<!--                <div class="row" style="padding-top:64px;">-->
-<!--                    <div class="col-4" style="border:1px solid black;">-->
-<!--                        <img src="/custom_report/static/src/img/Question Icon.png" style="width:100%;height:60px;"/>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="row" style="padding-top:64px;">-->
+                <!--                    <div class="col-4" style="border:1px solid black;">-->
+                <!--                        <img src="/custom_report/static/src/img/Question Icon.png" style="width:100%;height:60px;"/>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <div class="row" style="padding-top:8px;">
                     <div class="col-12">
                         <ul style="padding:0px;">
@@ -361,34 +383,34 @@
         </t>
     </template>
 
-<!--    <template id="invoice_report_templates">-->
-<!--        <t t-call="web.html_container">-->
-<!--            <t t-foreach="docs" t-as="o">-->
-<!--                <t t-call="custom_report.report_invoice"/>-->
-<!--            </t>-->
-<!--        </t>-->
-<!--    </template>-->
+    <!--    <template id="invoice_report_templates">-->
+    <!--        <t t-call="web.html_container">-->
+    <!--            <t t-foreach="docs" t-as="o">-->
+    <!--                <t t-call="custom_report.report_invoice"/>-->
+    <!--            </t>-->
+    <!--        </t>-->
+    <!--    </template>-->
 
-        <template id="account.report_invoice_with_payments">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
-                    <t t-set="print_with_payments" t-value="True"/>
-                    <t t-if="o._get_name_invoice_report() == 'account.report_invoice_document'"
-                        t-call="custom_report.report_invoice" t-lang="lang"/>
-                </t>
+    <template id="account.report_invoice_with_payments">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                <t t-set="print_with_payments" t-value="True"/>
+                <t t-if="o._get_name_invoice_report() == 'account.report_invoice_document'"
+                   t-call="custom_report.report_invoice" t-lang="lang"/>
             </t>
-        </template>
+        </t>
+    </template>
 
-     <template id="account.report_invoice">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
-                    <t t-if="o._get_name_invoice_report() == 'account.report_invoice_document'"
-                        t-call="custom_report.report_invoice" t-lang="lang"/>
-                </t>
+    <template id="account.report_invoice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                <t t-if="o._get_name_invoice_report() == 'account.report_invoice_document'"
+                   t-call="custom_report.report_invoice" t-lang="lang"/>
             </t>
-        </template>
+        </t>
+    </template>
 
 
 
