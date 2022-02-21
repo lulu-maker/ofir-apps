@@ -35,18 +35,19 @@
         <div class="footer o_standard_footer" style="margin-left:-15px;margin-right:-15px;">
             <div class="row" style="border-top: 1px solid black;">
                 <div class="col-4 text-center" style="padding-top:8px;">
-                    <div style="font-size:12px;">Sjedište: <t t-esc="o.company_id.sjedište"/></div>
-                    <div style="font-size:12px;">Poslovna jedinica: Vinkovačka cesta 68, Osijek, HR
-                        <!--                        <t t-esc="o.company_id.street"/>-->
-                        <!--                        <t t-esc="o.company_id.city"/>-->
-                        <!--                        <t t-if="o.company_id.zip">,</t>-->
-                        <!--                        <t t-esc="o.company_id.zip"/>-->
-                        <!--                        <t t-if="o.company_id.state_id">,</t>-->
-                        <!--                        <t t-esc="o.company_id.state_id.name"/>-->
+                    <div style="font-size:12px;">Headquarters: <t t-esc="o.company_id.sjedište"/></div>
+                        <div style="font-size:12px;">Working Unit:
+                            <t t-esc="o.company_id.street"/>
+                            <t t-esc="o.company_id.city"/>
+                            <t t-if="o.company_id.zip">,</t>
+                            <t t-esc="o.company_id.zip"/>
+                            <t t-if="o.company_id.state_id">,</t>
+                            <t t-esc="o.company_id.state_id.name"/>
+                        </div>
                     </div>
                 </div>
                 <div class="col-4 text-center" style="padding-top:8px;">
-                    <div style="font-size:12px;">OIB:
+                    <div style="font-size:12px;">VAT:
                         <t t-esc="o.company_id.vat"/>
                     </div>
                     <div style="font-size:12px;">IBAN:
@@ -54,7 +55,7 @@
                     </div>
                 </div>
                 <div class="col-4 text-center" style="padding-top:8px;">
-                    <div style="font-size:12px;">Telefon:
+                    <div style="font-size:12px;">Phone:
                         <t t-esc="o.company_id.phone"/>
                     </div>
                     <div style="font-size:12px;">E-mail:
@@ -69,7 +70,7 @@
                     </div>
                     <div class="text-right" style="font-size:12px;padding-top:8px;">
                         <div t-if="report_type == 'pdf'" class="text-black">
-                            Stranica:
+                            Page:
                             <span class="page"/>
                             /
                             <span class="topage"/>
@@ -91,7 +92,7 @@
             <div class="page" style="margin-left: 15px;margin-right:15px;">
                 <div class="row" style="border-bottom: 1px solid #f1f1f1;">
                     <div class="col-7" style="padding-top:16px;padding-bottom:16px;">
-                        <div class="text-muted" style="font-size:12px;">Kupac:</div>
+                        <div class="text-muted" style="font-size:12px;">Customer:</div>
                         <div style="font-size:12px;">
                             <strong>
                                 <t t-esc="o.partner_id.name"/>
@@ -108,7 +109,7 @@
                             <t t-esc="o.partner_id.state_id.name"/>
                         </div>
                         <div style="font-size:12px;padding-top:8px;">
-                            <strong>OIB:</strong>
+                            <strong>VAT:</strong>
                             <t t-esc="o.company_id.vat"/>
                         </div>
                         <div style="font-size:12px;">
@@ -121,7 +122,7 @@
                         <div class="row" style="padding:5px;margin-bottom:3px;background-color:lightgray;">
                             <div class="col-6">
                                 <div style="font-size:12px;">
-                                    <strong>R1 Račun Broj:</strong>
+                                    <strong>Invoice No:</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right">
@@ -136,27 +137,27 @@
                             <div class="col-5">
                                 <t t-if="o.invoice_date_time">
                                     <div style="font-size:12px;">
-                                        <strong>Datum Računa:</strong>
+                                        <strong>Invoice Date:</strong>
                                     </div>
                                 </t>
                                 <t t-if="o.invoice_user_id">
                                     <div style="font-size:12px;">
-                                        <strong>Prodavač:</strong>
+                                        <strong>Sales Person:</strong>
                                     </div>
                                 </t>
                                 <t t-if="o.delivery_date_time">
                                     <div style="font-size:11px;">
-                                        <strong>Datum Isporuke:</strong>
+                                        <strong>Delivery Date:</strong>
                                     </div>
                                 </t>
                                 <t t-if="o.invoice_date_due">
                                     <div style="font-size:12px;">
-                                        <strong>Rok Plaćanja:</strong>
+                                        <strong>Payment Deadline:</strong>
                                     </div>
                                 </t>
                                 <t t-elif="o.invoice_payment_term_id">
                                     <div style="font-size:12px;">
-                                        <strong>Rok Plaćanja:</strong>
+                                        <strong>Payment Terms:</strong>
                                     </div>
                                 </t>
 
@@ -193,46 +194,46 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top:24px;background-color:lightgray;padding:5px;">
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div style="font-size:12px;">
-                                    R. Br.
+                                    No.
                                 </div>
                             </div>
-                            <div class="col-9">
+                            <div class="col-10">
                                 <div style="font-size:12px;">
-                                    Opis proizvoda / usluge
+                                    Description
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="row">
                             <div class="col-2 text-center">
-                                <div style="font-size:10px;">
-                                    Količina
+                                <div style="font-size:12px;">
+                                    Quantity
                                 </div>
                             </div>
                             <div class="col-3 text-center">
                                 <div style="font-size:12px;">
-                                    Cijena
+                                    Unit Price
+                                </div>
+                            </div>
+                             <div class="col-2 text-center">
+                                <div style="font-size:12px;">
+                                    Disc.%
                                 </div>
                             </div>
                             <div class="col-2 text-center">
                                 <div style="font-size:12px;">
-                                    Popust
-                                </div>
-                            </div>
-                            <div class="col-2 text-center">
-                                <div style="font-size:12px;">
-                                    Porezi
+                                    Taxes
                                 </div>
                             </div>
                             <div class="col-3 text-right">
                                 <div style="font-size:12px;">
-                                    Cijena
+                                    Subtotal
                                 </div>
                             </div>
                         </div>
@@ -241,8 +242,7 @@
                 <t t-set="seq" t-value="1"/>
                 <t t-foreach="o.invoice_line_ids" t-as="line">
                     <div class="row" style="border: 1px solid #f1f1f1;">
-
-                        <div class="col-6">
+                        <div class="col-5">
                             <div class="row">
                                 <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
                                     <div style="font-size:12px;">
@@ -257,12 +257,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-6">
+                        <div class="col-7">
                             <div class="row">
                                 <div class="col-2 text-center" style="border-right: 1px solid #f1f1f1;">
                                     <div style="font-size:12px;">
-                                        <t t-esc="int(line.quantity)"/>
+                                        <t t-esc="'{:.2f}'.format(line.quantity)"/>
                                     </div>
                                 </div>
                                 <div class="col-3 text-center" style="border-right: 1px solid #f1f1f1;">
@@ -298,7 +297,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:13px;">
-                                    <strong>Ukupno</strong>
+                                    <strong>Unit Amoun Total</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -313,7 +312,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;border-bottom: 1px solid black;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:13px;">
-                                    <strong>Porezi</strong>
+                                    <strong>Taxes</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -328,7 +327,7 @@
                         <div class="row" style="padding-top:8px;padding-bottom:8px;">
                             <div class="col-6" style="padding:0px;">
                                 <div style="font-size:15px;">
-                                    <strong>UKUPNO ZA PLATITI</strong>
+                                    <strong>Total</strong>
                                 </div>
                             </div>
                             <div class="col-6 text-right" style="padding:0px;">
@@ -360,20 +359,20 @@
                         <ul style="padding:0px;">
                             <img t-att-src="'https://braco.does-it.net/2dbarcode/web/api/v1/barcode?renderer=image&amp;options[format]=png&amp;options[color]=%23000000&amp;options[scale]=1&amp;options[padding]=5&amp;options[ratio]=2&amp;data[amount]='+str(o.amount_total)+'&amp;data[sender][name]='+(o.partner_id.name)[:29]+'&amp;data[sender][street]='+(o.partner_id.street)[:26]+'&amp;data[sender][place]='+(o.partner_id.city)[:26]+'&amp;data[receiver][name]=Ofir+d.o.o.&amp;data[receiver][street]=Ramska+20&amp;data[receiver][place]=31000+Osijek&amp;data[receiver][iban]=HR5323600001101368262&amp;data[receiver][model]=00&amp;data[receiver][reference]='+o.name+'&amp;data[purpose]=SCVE&amp;data[description]=Uplata po rc+'+o.name+''"/>
                             <li style="font-size:12px;">
-                                <strong>Način plaćanja:</strong>
-                                Transakcijski Račun
+                                <strong>Payment Method: </strong>
+                                Bank Transaction
                                 <!--                                <t t-esc="o.payment_reference"/>-->
                             </li>
                             <li style="font-size:12px;">
-                                <strong>Operater / Račun izdao:  </strong>
+                                <strong>Operater:  </strong>
                                 <t t-esc="o.user_id.name"/>
                             </li>
                             <li style="font-size:12px;">
-                                <strong>Podaci za uplatu: </strong>
-                                <t t-esc="o.company_id.iban"/>, poziv na broj: <t t-esc="o.name"/>
+                                <strong>Payment Instructions: </strong>
+                                <t t-esc="o.company_id.iban"/>, reference number: <t t-esc="o.name"/>
                             </li>
                             <li style="font-size:12px;">
-                                <strong>Napomena: </strong>
+                                <strong>Note: </strong>
                                 <t t-esc="o.narration"/>
                             </li>
                         </ul>
